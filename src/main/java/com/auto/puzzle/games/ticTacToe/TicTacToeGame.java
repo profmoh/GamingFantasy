@@ -88,7 +88,22 @@ public class TicTacToeGame implements BaseGame {
 
 	@Override
 	public void gainExperience() {
-		
+		switch (currentState) {
+		case PLAYING:
+			this.experienceScore += ExperienceGained.STEP.getScore();
+			break;
+		case DRAW:
+			this.experienceScore += ExperienceGained.DRAW.getScore();
+			break;
+		case WON:
+			this.experienceScore += ExperienceGained.WON.getScore();
+			break;
+		case LOSE:
+			this.experienceScore += ExperienceGained.LOSE.getScore();
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -187,19 +202,12 @@ public class TicTacToeGame implements BaseGame {
 	}
 
 	private void updateGame(CellValue playerValue) {
-		if (board.hasWon(playerValue)) {
+		if (board.hasWon(playerValue))
 			currentState = (playerValue.equals(characterCellValue)) ? GameState.WON : GameState.LOSE;
-
-			if(currentState.equals(GameState.WON))
-				this.experienceScore += ExperienceGained.WON.getScore();
-			else if(currentState.equals(GameState.LOSE))
-				this.experienceScore += ExperienceGained.LOSE.getScore();
-		} else if (board.isDraw()) {
+		else if (board.isDraw())
 			currentState = GameState.DRAW;
-			this.experienceScore += ExperienceGained.DRAW.getScore();
-		}
 
-		this.experienceScore += ExperienceGained.STEP.getScore();
+		gainExperience();
 	}
 
 	private List<GameInstance> loadGameFile(String characterName) {

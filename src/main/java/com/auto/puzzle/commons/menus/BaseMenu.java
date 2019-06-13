@@ -27,9 +27,11 @@ public interface BaseMenu<I extends BaseMenuItem<I>> {
 		return getMenuItemClass().getValue(keyValue);
 	}
 
-	default I showMenu() {
+	default void showMenu() {
 		printOptions();
+	}
 
+	default I waitInput() {
 		return selectOption();
 	}
 

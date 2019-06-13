@@ -16,7 +16,7 @@ public class StartGame {
 	public static void launch() {
 		try {
 //			LOG.info("CLI calling MainMenuManager...");
-			menuHandler.showMenu();
+			menuHandler.showMenuLoop();
 		} catch (Exception e) {
 			Exit("", e);
 		}

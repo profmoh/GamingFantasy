@@ -1,13 +1,19 @@
 package com.auto.puzzle.configuration;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class ContextHandlerTest {
+import com.auto.puzzle.commons.enums.GameEnum;
+import com.auto.puzzle.commons.exceptions.NoSuchBeanException;
+import com.auto.puzzle.games.BaseGame;
 
-//	private MenuHandler<?> menuHandler = ContextHandler.getBean(MenuHandler.class);
+public class ContextHandlerTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -15,21 +21,26 @@ public class ContextHandlerTest {
 
 	@Test
 	public void testGetGameList() {
-		fail("Not yet implemented");
+		List<BaseGame> gamesList = ContextHandler.getGameList();
+
+		// check not null
+		assertNotNull(gamesList);
+
+		// check the list size equals to games stored in GameEnum
+        assertThat(gamesList, hasSize(GameEnum.values().length));
 	}
 
-	@Test
-	public void testContextHandler() {
-		fail("Not yet implemented");
+	@Test(expected = NoSuchBeanException.class)
+	public void testGetBeanShouldThroughNoSuchBeanException() {
+		ContextHandler.getBean(ContextHandlerTest.class);
 	}
 
 	@Test
 	public void testAddClassToContext() {
-		fail("Not yet implemented");
-	}
+		Class<ContextHandlerTest> tClass = ContextHandlerTest.class;
 
-	@Test
-	public void testGetBean() {
-		fail("Not yet implemented");
+		ContextHandler.addClassToContext(tClass, new ContextHandlerTest());
+
+		assertNotNull(ContextHandler.getBean(tClass));
 	}
 }
