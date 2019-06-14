@@ -56,9 +56,7 @@ public class ContextHandler {
 				
 				BaseGame game = (BaseGame) ctor.newInstance();
 
-				addClassToContext(gameEnum.getGameClass(), game);
-
-				gameSet.add(game);
+				addGameToContext(gameEnum.getGameClass(), game);
 			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 				continue;
@@ -83,6 +81,13 @@ public class ContextHandler {
 
 		BaseMenu<GameMenuItem> gameMenu = new GameMenu();
 		addClassToContext(GameMenu.class, gameMenu);
+	}
+
+	public static <G extends BaseGame> void addGameToContext(Class<G> gClass, G game) {
+		context.put(gClass.getClass(), game);
+		context.put(gClass, game);
+
+		gameSet.add(game);
 	}
 
 	private static void handlers() {

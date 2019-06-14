@@ -15,7 +15,7 @@ import com.auto.puzzle.games.BaseGame;
 
 public class TicTacToeGame implements BaseGame {
 
-	private final String TTT_FILE_PATH = Config.RESOURCE_SAVINGS_FOLDER + getGameEnum().getName() + Config.RESOURCE_SAVINGS_EXTENSTION;
+	private final String TTT_FILE_PATH = Config.RESOURCE_SAVINGS_FOLDER + this.getName() + Config.RESOURCE_SAVINGS_EXTENSTION;
 
 	public static final String FIELD_SEP = "\t%\t";
 
@@ -30,8 +30,8 @@ public class TicTacToeGame implements BaseGame {
 	private CellValue characterCellValue = CellValue.CROSS;
 
 	@Override
-	public GameEnum getGameEnum() {
-		return GameEnum.TIC_TAC_TOE;
+	public String getName() {
+		return GameEnum.TIC_TAC_TOE.getName();
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class TicTacToeGame implements BaseGame {
 
 				if(row == -1) {
 					saveGame(characterName);
-					io.showMessageWithNewLine("state saved");
+
 					row = io.tryReadingInputAsInt("enter your move, row number [1-" + board.SIZE + "]") - 1;
 				}
 
