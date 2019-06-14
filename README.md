@@ -3,7 +3,8 @@ Command line based role playing game. Simulate gaming platform. Where player can
 
 It is also easy to extend. For adding new game to the platform you just needs to:
   - Create the game class which implements `BaseGame` interface.
-  - Add Enum key to the `GameEnum` enum.
+  - Add the class to the context, by using the following code:
+  		`ContextHandler.addGameToContext(gameClass, gameInstance);`
   - Implement all the methods of BaseGame interface.
 
 # Requirements

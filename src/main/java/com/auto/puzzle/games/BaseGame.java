@@ -1,14 +1,8 @@
 package com.auto.puzzle.games;
 
-import com.auto.puzzle.commons.enums.GameEnum;
-
 public interface BaseGame {
 
-	GameEnum getGameEnum();
-
-	default String getName() {
-		return getGameEnum().getName();
-	}
+	String getName();
 
 	void explore(String characterName);
 

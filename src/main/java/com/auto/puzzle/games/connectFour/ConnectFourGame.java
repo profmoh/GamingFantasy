@@ -6,8 +6,8 @@ import com.auto.puzzle.games.BaseGame;
 public class ConnectFourGame implements BaseGame {
 
 	@Override
-	public GameEnum getGameEnum() {
-		return GameEnum.CONNECT_FOUR;
+	public String getName() {
+		return GameEnum.CONNECT_FOUR.getName();
 	}
 
 	@Override
